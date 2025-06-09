@@ -262,44 +262,40 @@
             background-color: #f9f9f9;
         }
 
-        .photo-placeholder {
+        .document-image {
             width: 100%;
-            height: 150px;
-            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
-                        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
-                        linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
-                        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            height: 200px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            background: linear-gradient(45deg, #f8f9fa 25%, transparent 25%), 
+                        linear-gradient(-45deg, #f8f9fa 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #f8f9fa 75%), 
+                        linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
             background-size: 20px 20px;
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-            border: 2px dashed #ccc;
-            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #999;
+            flex-direction: column;
+            color: #666;
             font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        .photo-upload {
             position: relative;
-            cursor: pointer;
+            overflow: hidden;
         }
 
-        .photo-upload input[type="file"] {
-            position: absolute;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
+        .document-image::before {
+            content: "📄";
+            font-size: 40px;
+            margin-bottom: 10px;
         }
 
-        .uploaded-image {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 6px;
-            margin-bottom: 8px;
+        .document-image::after {
+            content: "西安交通大学\\A成绩单文档\\A已验证通过";
+            white-space: pre;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
         }
     </style>
 </head>
@@ -335,7 +331,7 @@
                 </div>
                 <div class="info-row">
                     <span class="info-label">证明名称：</span>
-                    <span class="info-value">成绩单_中文</span>
+                    <span class="info-value">成绩单_中英文</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">打印时间：</span>
@@ -366,31 +362,21 @@
             <span class="close" onclick="closeDetails()">&times;</span>
             <h2>详细信息</h2>
             <div class="detail-content">
-                <p><strong>文档类型：</strong>成绩单（中文版本）</p>
+                <p><strong>文档类型：</strong>成绩单（中英文版本）</p>
                 <p><strong>验证状态：</strong>已通过验证</p>
                 <p><strong>生成时间：</strong>2025年5月14日 16:42:53</p>
                 <p><strong>有效期：</strong>长期有效</p>
-                <p><strong>验证码：</strong>XJTU-2025-051416</p>
+                <p><strong>验证码：</strong>XJT-2025-051416</p>
                 
                 <div class="photo-gallery">
                     <h3>📄 证明文件照片</h3>
                     <div class="photo-grid">
                         <div class="photo-item">
-                            <div class="photo-upload" onclick="document.getElementById('photo1').click()">
-                                <input type="file" id="photo1" accept="image/*" onchange="uploadPhoto(this, 'preview1')">
-                                <div id="preview1" class="photo-placeholder">
-                                    点击上传第一张照片
-                                </div>
-                            </div>
+                            <div class="document-image"></div>
                             <div style="font-size: 12px; color: #666;">成绩单正面</div>
                         </div>
                         <div class="photo-item">
-                            <div class="photo-upload" onclick="document.getElementById('photo2').click()">
-                                <input type="file" id="photo2" accept="image/*" onchange="uploadPhoto(this, 'preview2')">
-                                <div id="preview2" class="photo-placeholder">
-                                    点击上传第二张照片
-                                </div>
-                            </div>
+                            <div class="document-image"></div>
                             <div style="font-size: 12px; color: #666;">成绩单背面</div>
                         </div>
                     </div>
@@ -402,19 +388,6 @@
     </div>
 
     <script>
-        // 照片上传功能
-        function uploadPhoto(input, previewId) {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById(previewId);
-                    preview.innerHTML = `<img src="${e.target.result}" class="uploaded-image" alt="上传的照片">`;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
         function showDetails() {
             document.getElementById('detailModal').style.display = 'block';
         }
