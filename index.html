@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西安交通大学-证明文件认证</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .header .url {
+            font-size: 14px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .language-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .verification-box {
+            border: 3px dashed #3498db;
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+            background-color: #fafafa;
+        }
+
+        .logo-section {
+            margin-bottom: 30px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            background: linear-gradient(135deg, #1e3d72 0%, #2c5aa0 100%);
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 15px 20px;
+            border-radius: 8px 0 0 8px;
+            letter-spacing: 1px;
+        }
+
+        .logo-curve {
+            width: 40px;
+            height: 54px;
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            border-radius: 0 25px 25px 0;
+            position: relative;
+        }
+
+        .logo-curve::before {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid #e67e22;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+
+        .company-name {
+            color: #1e3d72;
+            font-size: 16px;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+
+        .status {
+            font-size: 36px;
+            color: #3498db;
+            font-weight: bold;
+            margin: 30px 0;
+            letter-spacing: 3px;
+        }
+
+        .info-section {
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .info-label {
+            color: #333;
+            min-width: 120px;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #3498db;
+            font-weight: 500;
+        }
+
+        .notice {
+            color: #999;
+            font-size: 14px;
+            margin: 30px 0 20px 0;
+            line-height: 1.8;
+        }
+
+        .detail-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .detail-btn:hover {
+            background-color: #219a52;
+        }
+
+        .detail-btn:active {
+            transform: translateY(1px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .verification-box {
+                padding: 30px 20px;
+            }
+            
+            .status {
+                font-size: 28px;
+            }
+            
+            .info-row {
+                flex-direction: column;
+                margin-bottom: 10px;
+            }
+            
+            .info-label {
+                min-width: auto;
+                margin-bottom: 5px;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .detail-content {
+            margin-top: 20px;
+        }
+
+        .photo-gallery {
+            margin: 20px 0;
+        }
+
+        .photo-gallery h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .photo-item {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            border: 2px dashed #ccc;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .photo-upload {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .photo-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .uploaded-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>西安交通大学-证明文件认证</h1>
+            <div class="url">zzfw.xjtu.edu.cn</div>
+        </div>
+        <button class="language-btn">English</button>
+    </div>
+
+    <div class="container">
+        <div class="verification-box">
+            <div class="logo-section">
+                <div class="logo-container">
+                    <div class="logo">WiseEdu</div>
+                    <div class="logo-curve"></div>
+                    <div class="company-name">金智教育</div>
+                </div>
+            </div>
+
+            <div class="status">验证通过</div>
+
+            <div class="info-section">
+                <div class="info-row">
+                    <span class="info-label">学号/工号：</span>
+                    <span class="info-value">2223411031</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">姓名：</span>
+                    <span class="info-value">丁冠群</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">证明名称：</span>
+                    <span class="info-value">成绩单_中文</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">打印时间：</span>
+                    <span class="info-value">2025-05-14<br>16:42:53</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">打印终端：</span>
+                    <span class="info-value">L3346000026</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">终端地址：</span>
+                    <span class="info-value">西安交通大学(兴庆校区)<br>-西南门教务大厅</span>
+                </div>
+            </div>
+
+            <div class="notice">
+                此证明材料真实有效，如果需要查看详细内容，<br>
+                请点击"查看详情"
+            </div>
+
+            <button class="detail-btn" onclick="showDetails()">查看详情</button>
+        </div>
+    </div>
+
+    <!-- 模态框 -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDetails()">&times;</span>
+            <h2>详细信息</h2>
+            <div class="detail-content">
+                <p><strong>文档类型：</strong>成绩单（中文版本）</p>
+                <p><strong>验证状态：</strong>已通过验证</p>
+                <p><strong>生成时间：</strong>2025年5月14日 16:42:53</p>
+                <p><strong>有效期：</strong>长期有效</p>
+                <p><strong>验证码：</strong>XJTU-2025-051416</p>
+                
+                <div class="photo-gallery">
+                    <h3>📄 证明文件照片</h3>
+                    <div class="photo-grid">
+                        <div class="photo-item">
+                            <div class="photo-upload" onclick="document.getElementById('photo1').click()">
+                                <input type="file" id="photo1" accept="image/*" onchange="uploadPhoto(this, 'preview1')">
+                                <div id="preview1" class="photo-placeholder">
+                                    点击上传第一张照片
+                                </div>
+                            </div>
+                            <div style="font-size: 12px; color: #666;">成绩单正面</div>
+                        </div>
+                        <div class="photo-item">
+                            <div class="photo-upload" onclick="document.getElementById('photo2').click()">
+                                <input type="file" id="photo2" accept="image/*" onchange="uploadPhoto(this, 'preview2')">
+                                <div id="preview2" class="photo-placeholder">
+                                    点击上传第二张照片
+                                </div>
+                            </div>
+                            <div style="font-size: 12px; color: #666;">成绩单背面</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p><strong>备注：</strong>此文档为西安交通大学正式出具的学术证明材料，具有法律效力。</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 照片上传功能
+        function uploadPhoto(input, previewId) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById(previewId);
+                    preview.innerHTML = `<img src="${e.target.result}" class="uploaded-image" alt="上传的照片">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function showDetails() {
+            document.getElementById('detailModal').style.display = 'block';
+        }
+
+        function closeDetails() {
+            document.getElementById('detailModal').style.display = 'none';
+        }
+
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // 语言切换功能
+        document.querySelector('.language-btn').addEventListener('click', function() {
+            alert('语言切换功能开发中...');
+        });
+
+        // 生成二维码URL（示例）
+        function generateQRCode() {
+            const currentUrl = window.location.href;
+            console.log('二维码链接:', currentUrl);
+            // 这里可以集成二维码生成库
+        }
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            generateQRCode();
+        });
+    </script>
+</body>
+</html>
