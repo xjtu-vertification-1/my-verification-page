@@ -210,12 +210,14 @@
 
         .modal-content {
             background-color: white;
-            margin: 10% auto;
+            margin: 5% auto;
             padding: 30px;
             border-radius: 12px;
             width: 90%;
-            max-width: 500px;
+            max-width: 600px;
             position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .close {
@@ -245,6 +247,7 @@
             color: #333;
             margin-bottom: 15px;
             font-size: 16px;
+            text-align: center;
         }
 
         .photo-grid {
@@ -262,40 +265,36 @@
             background-color: #f9f9f9;
         }
 
-        .document-image {
+        .photo-item img {
             width: 100%;
-            height: 200px;
-            border: 2px solid #ddd;
+            height: 250px;
+            object-fit: cover;
             border-radius: 6px;
             margin-bottom: 8px;
-            background: linear-gradient(45deg, #f8f9fa 25%, transparent 25%), 
-                        linear-gradient(-45deg, #f8f9fa 25%, transparent 25%), 
-                        linear-gradient(45deg, transparent 75%, #f8f9fa 75%), 
-                        linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            color: #666;
-            font-size: 14px;
-            position: relative;
-            overflow: hidden;
+            border: 1px solid #ddd;
         }
 
-        .document-image::before {
-            content: "📄";
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .document-image::after {
-            content: "西安交通大学\\A成绩单文档\\A已验证通过";
-            white-space: pre;
-            text-align: center;
+        .photo-label {
             font-size: 12px;
-            color: #999;
+            color: #666;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 3% auto;
+                padding: 20px;
+            }
+            
+            .photo-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .photo-item img {
+                height: 300px;
+            }
         }
     </style>
 </head>
@@ -372,12 +371,12 @@
                     <h3>📄 证明文件照片</h3>
                     <div class="photo-grid">
                         <div class="photo-item">
-                            <img src="66.jpg" alt="成绩单正面" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 8px;">
-                            <div style="font-size: 12px; color: #666;">成绩单正面</div>
+                            <img src="66.jpg" alt="成绩单正面">
+                            <div class="photo-label">成绩单正面</div>
                         </div>
                         <div class="photo-item">
-                            <img src="transcript-back.jpg" alt="成绩单背面" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 8px;">
-                            <div style="font-size: 12px; color: #666;">成绩单背面</div>
+                            <img src="transcript-back.jpg" alt="成绩单背面">
+                            <div class="photo-label">成绩单背面</div>
                         </div>
                     </div>
                 </div>
