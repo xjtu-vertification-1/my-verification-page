@@ -71,49 +71,16 @@
         }
 
         .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0;
+            width: 100%;
             margin-bottom: 0;
         }
 
-        .logo {
-            background: linear-gradient(135deg, #1e3d72 0%, #2c5aa0 100%);
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            padding: 15px 20px;
-            border-radius: 8px 0 0 8px;
-            letter-spacing: 1px;
-        }
-
-        .logo-curve {
-            width: 40px;
-            height: 54px;
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
-            border-radius: 0 25px 25px 0;
-            position: relative;
-        }
-
-        .logo-curve::before {
-            content: '';
-            position: absolute;
-            right: -15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-left: 15px solid #e67e22;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-        }
-
-        .company-name {
-            color: #1e3d72;
-            font-size: 16px;
-            font-weight: bold;
-            margin-left: 15px;
+        .logo-image {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            border-radius: 9px 9px 0 0;
         }
 
         .content-section {
@@ -320,9 +287,7 @@
         <div class="verification-box">
             <div class="logo-section">
                 <div class="logo-container">
-                    <div class="logo">WiseEdu</div>
-                    <div class="logo-curve"></div>
-                    <div class="company-name">金智教育</div>
+                    <img src="11.png" alt="WiseEdu金智教育" class="logo-image">
                 </div>
             </div>
 
