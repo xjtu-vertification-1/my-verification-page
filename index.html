@@ -60,7 +60,7 @@
         .verification-box {
             border: 3px dashed #3498db;
             border-radius: 12px;
-            padding: 40px 30px;
+            padding: 0 30px 40px 30px;
             text-align: center;
             background-color: #fafafa;
         }
@@ -70,17 +70,15 @@
         }
 
         .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
+            width: 100%;
+            margin-bottom: 0;
         }
 
         .logo-image {
-            width: 90%;
-            max-width: 400px;
+            width: 100%;
             height: auto;
             object-fit: contain;
+            display: block;
         }
 
         .status {
@@ -226,26 +224,19 @@
         }
 
         .photo-item {
-            border: 2px solid #e0e0e0;
+            border: none;
             border-radius: 8px;
-            padding: 10px;
+            padding: 0;
             text-align: center;
-            background-color: #f9f9f9;
+            background-color: transparent;
         }
 
         .photo-item img {
             width: 100%;
-            height: 250px;
+            height: 300px;
             object-fit: cover;
             border-radius: 6px;
-            margin-bottom: 8px;
             border: 1px solid #ddd;
-        }
-
-        .photo-label {
-            font-size: 12px;
-            color: #666;
-            font-weight: 500;
         }
 
         @media (max-width: 768px) {
@@ -325,29 +316,17 @@
     <div id="detailModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeDetails()">&times;</span>
-            <h2>详细信息</h2>
             <div class="detail-content">
-                <p><strong>文档类型：</strong>成绩单（中英文版本）</p>
-                <p><strong>验证状态：</strong>已通过验证</p>
-                <p><strong>生成时间：</strong>2025年5月14日 16:42:53</p>
-                <p><strong>有效期：</strong>长期有效</p>
-                <p><strong>验证码：</strong>XJTU-2025-051416</p>
-                
                 <div class="photo-gallery">
-                    <h3>📄 证明文件照片</h3>
                     <div class="photo-grid">
                         <div class="photo-item">
                             <img src="66.jpg" alt="成绩单正面">
-                            <div class="photo-label">成绩单正面</div>
                         </div>
                         <div class="photo-item">
                             <img src="transcript-back.jpg" alt="成绩单背面">
-                            <div class="photo-label">成绩单背面</div>
                         </div>
                     </div>
                 </div>
-                
-                <p><strong>备注：</strong>此文档为西安交通大学正式出具的学术证明材料，具有法律效力。</p>
             </div>
         </div>
     </div>
