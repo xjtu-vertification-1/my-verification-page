@@ -77,8 +77,8 @@
 
         .logo-image {
             width: 100%;
-            height: auto;
-            object-fit: contain;
+            height: 120px;
+            object-fit: cover;
             display: block;
             border-radius: 9px 9px 0 0;
         }
@@ -177,19 +177,23 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: #000;
-            overflow-y: auto;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('66.jpg') center/cover no-repeat,
+                        url('transcript-back.jpg') center/cover no-repeat;
+            filter: blur(3px);
+            overflow: hidden;
         }
 
         .modal-content {
-            background-color: #000;
+            background: transparent;
             margin: 0;
-            padding: 20px 0;
+            padding: 20px;
             width: 100%;
             height: 100vh;
             position: relative;
             display: flex;
             flex-direction: column;
+            backdrop-filter: blur(1px);
         }
 
         .close {
@@ -219,7 +223,9 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 40px 20px;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .photo-gallery {
@@ -232,30 +238,37 @@
         .photo-grid {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
             height: 100%;
         }
 
         .photo-item {
             border: none;
-            border-radius: 0;
+            border-radius: 10px;
             padding: 0;
             text-align: center;
-            background-color: transparent;
+            background-color: rgba(255,255,255,0.1);
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
         }
 
         .photo-item img {
             width: 100%;
-            max-width: 100%;
-            height: auto;
-            max-height: 45vh;
+            height: 100%;
             object-fit: contain;
-            border-radius: 0;
-            border: none;
+            border-radius: 10px;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s ease;
+            cursor: zoom-in;
+        }
+
+        .photo-item img:active {
+            transform: scale(1.5);
+            cursor: zoom-out;
         }
 
         @media (max-width: 768px) {
@@ -381,9 +394,60 @@
             // 这里可以集成二维码生成库
         }
 
+        // 双指缩放功能
+        let scale = 1;
+        let lastTouchDistance = 0;
+
+        function getDistance(touches) {
+            const dx = touches[0].clientX - touches[1].clientX;
+            const dy = touches[0].clientY - touches[1].clientY;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        function setupZoom() {
+            const images = document.querySelectorAll('.photo-item img');
+            
+            images.forEach(img => {
+                let currentScale = 1;
+                
+                img.addEventListener('touchstart', function(e) {
+                    if (e.touches.length === 2) {
+                        e.preventDefault();
+                        lastTouchDistance = getDistance(e.touches);
+                    }
+                });
+
+                img.addEventListener('touchmove', function(e) {
+                    if (e.touches.length === 2) {
+                        e.preventDefault();
+                        const currentDistance = getDistance(e.touches);
+                        const scaleChange = currentDistance / lastTouchDistance;
+                        currentScale *= scaleChange;
+                        currentScale = Math.max(0.5, Math.min(currentScale, 3)); // 限制缩放范围
+                        
+                        this.style.transform = `scale(${currentScale})`;
+                        lastTouchDistance = currentDistance;
+                    }
+                });
+
+                img.addEventListener('touchend', function(e) {
+                    if (e.touches.length < 2) {
+                        // 可以添加恢复原始大小的逻辑
+                    }
+                });
+
+                // 双击恢复原始大小
+                img.addEventListener('dblclick', function() {
+                    currentScale = 1;
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        }
+
         // 页面加载完成后的初始化
         document.addEventListener('DOMContentLoaded', function() {
             generateQRCode();
+            setupZoom();
         });
     </script>
 </body>
