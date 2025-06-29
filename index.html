@@ -104,17 +104,38 @@
             display: flex;
             margin-bottom: 15px;
             font-size: 16px;
+            align-items: flex-start;
+        }
+
+        .info-row.english {
+            font-size: 14px;
         }
 
         .info-label {
             color: #333;
             min-width: 120px;
             font-weight: 500;
+            flex-shrink: 0;
+        }
+
+        .info-label.english {
+            min-width: 140px;
+            font-size: 14px;
         }
 
         .info-value {
             color: #3498db;
             font-weight: 500;
+            flex: 1;
+        }
+
+        .info-value.english {
+            font-size: 14px;
+        }
+
+        .status.english {
+            font-size: 28px;
+            letter-spacing: 2px;
         }
 
         .notice {
@@ -295,29 +316,29 @@
                 <div class="status" id="status-text">验证通过</div>
 
                 <div class="info-section" id="info-section">
-                    <div class="info-row">
+                    <div class="info-row" id="row-student">
                         <span class="info-label" id="label-student">学号/工号：</span>
-                        <span class="info-value">2223411031</span>
+                        <span class="info-value" id="value-student">2223411031</span>
                     </div>
-                    <div class="info-row">
+                    <div class="info-row" id="row-name">
                         <span class="info-label" id="label-name">姓名：</span>
-                        <span class="info-value">丁冠群</span>
+                        <span class="info-value" id="value-name">丁冠群</span>
                     </div>
-                    <div class="info-row">
+                    <div class="info-row" id="row-document">
                         <span class="info-label" id="label-document">证明名称：</span>
                         <span class="info-value" id="document-title">成绩单_中英文</span>
                     </div>
-                    <div class="info-row">
+                    <div class="info-row" id="row-time">
                         <span class="info-label" id="label-time">打印时间：</span>
-                        <span class="info-value">2025-05-14<br>16:42:53</span>
+                        <span class="info-value" id="value-time">2025-05-14<br>16:42:53</span>
                     </div>
-                    <div class="info-row">
+                    <div class="info-row" id="row-terminal">
                         <span class="info-label" id="label-terminal">打印终端：</span>
-                        <span class="info-value">L3346000026</span>
+                        <span class="info-value" id="value-terminal">L3346000026</span>
                     </div>
-                    <div class="info-row">
+                    <div class="info-row" id="row-address">
                         <span class="info-label" id="label-address">终端地址：</span>
-                        <span class="info-value">西安交通大学(兴庆校区)<br>-西南门教务大厅</span>
+                        <span class="info-value" id="value-address">西安交通大学(兴庆校区)<br>-西南门教务大厅</span>
                     </div>
                 </div>
 
@@ -404,6 +425,7 @@
             const lang = isEnglish ? 'english' : 'chinese';
             const trans = translations[lang];
 
+            // 更新文本
             document.getElementById('status-text').innerHTML = trans.status;
             document.getElementById('label-student').textContent = trans.labelStudent;
             document.getElementById('label-name').textContent = trans.labelName;
@@ -415,6 +437,24 @@
             document.getElementById('notice-text').innerHTML = trans.notice;
             document.getElementById('detail-btn').textContent = trans.detailBtn;
             document.querySelector('.language-btn').textContent = trans.languageBtn;
+
+            // 添加/移除英文样式类
+            const statusElement = document.getElementById('status-text');
+            const infoRows = document.querySelectorAll('.info-row');
+            const infoLabels = document.querySelectorAll('.info-label');
+            const infoValues = document.querySelectorAll('.info-value');
+
+            if (isEnglish) {
+                statusElement.classList.add('english');
+                infoRows.forEach(row => row.classList.add('english'));
+                infoLabels.forEach(label => label.classList.add('english'));
+                infoValues.forEach(value => value.classList.add('english'));
+            } else {
+                statusElement.classList.remove('english');
+                infoRows.forEach(row => row.classList.remove('english'));
+                infoLabels.forEach(label => label.classList.remove('english'));
+                infoValues.forEach(value => value.classList.remove('english'));
+            }
         }
 
         document.querySelector('.language-btn').addEventListener('click', switchLanguage);
