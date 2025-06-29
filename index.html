@@ -73,46 +73,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0;
             margin-bottom: 10px;
         }
 
-        .logo {
-            background: linear-gradient(135deg, #1e3d72 0%, #2c5aa0 100%);
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            padding: 15px 20px;
-            border-radius: 8px 0 0 8px;
-            letter-spacing: 1px;
-        }
-
-        .logo-curve {
-            width: 40px;
-            height: 54px;
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
-            border-radius: 0 25px 25px 0;
-            position: relative;
-        }
-
-        .logo-curve::before {
-            content: '';
-            position: absolute;
-            right: -15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-left: 15px solid #e67e22;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-        }
-
-        .company-name {
-            color: #1e3d72;
-            font-size: 16px;
-            font-weight: bold;
-            margin-left: 15px;
+        .logo-image {
+            width: 90%;
+            max-width: 400px;
+            height: auto;
+            object-fit: contain;
         }
 
         .status {
@@ -311,9 +279,7 @@
         <div class="verification-box">
             <div class="logo-section">
                 <div class="logo-container">
-                    <div class="logo">WiseEdu</div>
-                    <div class="logo-curve"></div>
-                    <div class="company-name">金智教育</div>
+                    <img src="11.jpg" alt="WiseEdu金智教育" class="logo-image">
                 </div>
             </div>
 
@@ -330,7 +296,7 @@
                 </div>
                 <div class="info-row">
                     <span class="info-label">证明名称：</span>
-                    <span class="info-value">成绩单_中文</span>
+                    <span class="info-value">成绩单_中英文</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">打印时间：</span>
@@ -361,7 +327,7 @@
             <span class="close" onclick="closeDetails()">&times;</span>
             <h2>详细信息</h2>
             <div class="detail-content">
-                <p><strong>文档类型：</strong>成绩单（中文版本）</p>
+                <p><strong>文档类型：</strong>成绩单（中英文版本）</p>
                 <p><strong>验证状态：</strong>已通过验证</p>
                 <p><strong>生成时间：</strong>2025年5月14日 16:42:53</p>
                 <p><strong>有效期：</strong>长期有效</p>
