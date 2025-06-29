@@ -77,7 +77,8 @@
 
         .logo-image {
             width: 100%;
-            height: 120px;
+            height: auto;
+            min-height: 80px;
             object-fit: cover;
             display: block;
             border-radius: 9px 9px 0 0;
@@ -177,27 +178,23 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                        url('66.jpg') center/cover no-repeat,
-                        url('transcript-back.jpg') center/cover no-repeat;
-            filter: blur(3px);
+            background-color: #f5f5f5;
             overflow: hidden;
         }
 
         .modal-content {
-            background: transparent;
+            background-color: #f5f5f5;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             width: 100%;
             height: 100vh;
             position: relative;
             display: flex;
             flex-direction: column;
-            backdrop-filter: blur(1px);
         }
 
         .close {
-            color: white;
+            color: #333;
             position: fixed;
             right: 20px;
             top: 20px;
@@ -205,7 +202,7 @@
             font-weight: bold;
             cursor: pointer;
             z-index: 1001;
-            background: rgba(0,0,0,0.7);
+            background: rgba(255,255,255,0.9);
             width: 40px;
             height: 40px;
             border-radius: 20px;
@@ -215,60 +212,49 @@
         }
 
         .close:hover {
-            color: #ccc;
+            color: #666;
         }
 
         .detail-content {
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
+            padding: 0;
         }
 
         .photo-gallery {
             height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
         }
 
         .photo-grid {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            height: 100%;
+            gap: 0;
+            height: 100vh;
         }
 
         .photo-item {
             border: none;
-            border-radius: 10px;
+            border-radius: 0;
             padding: 0;
-            text-align: center;
-            background-color: rgba(255,255,255,0.1);
+            margin: 0;
+            background-color: transparent;
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            backdrop-filter: blur(5px);
         }
 
         .photo-item img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            border-radius: 10px;
-            border: 2px solid rgba(255,255,255,0.3);
-            transition: transform 0.3s ease;
-            cursor: zoom-in;
-        }
-
-        .photo-item img:active {
-            transform: scale(1.5);
-            cursor: zoom-out;
+            object-fit: cover;
+            border: none;
+            border-radius: 0;
+            display: block;
         }
 
         @media (max-width: 768px) {
@@ -394,60 +380,9 @@
             // 这里可以集成二维码生成库
         }
 
-        // 双指缩放功能
-        let scale = 1;
-        let lastTouchDistance = 0;
-
-        function getDistance(touches) {
-            const dx = touches[0].clientX - touches[1].clientX;
-            const dy = touches[0].clientY - touches[1].clientY;
-            return Math.sqrt(dx * dx + dy * dy);
-        }
-
-        function setupZoom() {
-            const images = document.querySelectorAll('.photo-item img');
-            
-            images.forEach(img => {
-                let currentScale = 1;
-                
-                img.addEventListener('touchstart', function(e) {
-                    if (e.touches.length === 2) {
-                        e.preventDefault();
-                        lastTouchDistance = getDistance(e.touches);
-                    }
-                });
-
-                img.addEventListener('touchmove', function(e) {
-                    if (e.touches.length === 2) {
-                        e.preventDefault();
-                        const currentDistance = getDistance(e.touches);
-                        const scaleChange = currentDistance / lastTouchDistance;
-                        currentScale *= scaleChange;
-                        currentScale = Math.max(0.5, Math.min(currentScale, 3)); // 限制缩放范围
-                        
-                        this.style.transform = `scale(${currentScale})`;
-                        lastTouchDistance = currentDistance;
-                    }
-                });
-
-                img.addEventListener('touchend', function(e) {
-                    if (e.touches.length < 2) {
-                        // 可以添加恢复原始大小的逻辑
-                    }
-                });
-
-                // 双击恢复原始大小
-                img.addEventListener('dblclick', function() {
-                    currentScale = 1;
-                    this.style.transform = 'scale(1)';
-                });
-            });
-        }
-
         // 页面加载完成后的初始化
         document.addEventListener('DOMContentLoaded', function() {
             generateQRCode();
-            setupZoom();
         });
     </script>
 </body>
