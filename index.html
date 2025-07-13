@@ -239,58 +239,41 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 0;
+            padding: 20px;
         }
 
         .photo-gallery {
             height: 100%;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .photo-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            height: 100vh;
-        }
-
-        .photo-item {
-            border: none;
-            border-radius: 0;
-            padding: 0;
-            margin: 0;
-            background-color: transparent;
-            flex: 1;
+        .photo-container {
+            width: 100%;
+            max-width: 800px;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
         }
 
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border: none;
-            border-radius: 0;
-            display: block;
+        .photo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         @media (max-width: 768px) {
-            .modal-content {
-                width: 95%;
-                margin: 3% auto;
-                padding: 20px;
+            .detail-content {
+                padding: 10px;
             }
             
-            .photo-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .photo-item img {
-                height: 300px;
+            .photo-container {
+                max-width: 100%;
             }
         }
     </style>
@@ -330,15 +313,15 @@
                     </div>
                     <div class="info-row" id="row-time">
                         <span class="info-label" id="label-time">打印时间：</span>
-                        <span class="info-value" id="value-time">2025-05-14<br>16:42:53</span>
+                        <span class="info-value" id="value-time">2025-07-13<br>14:36:11</span>
                     </div>
                     <div class="info-row" id="row-terminal">
                         <span class="info-label" id="label-terminal">打印终端：</span>
-                        <span class="info-value" id="value-terminal">L3346000026</span>
+                        <span class="info-value" id="value-terminal">L3346000030</span>
                     </div>
                     <div class="info-row" id="row-address">
                         <span class="info-label" id="label-address">终端地址：</span>
-                        <span class="info-value" id="value-address">西安交通大学(兴庆校区)<br>-西南门教务大厅</span>
+                        <span class="info-value" id="value-address">教务大厅</span>
                     </div>
                 </div>
 
@@ -358,13 +341,8 @@
             <span class="close" onclick="closeDetails()">&times;</span>
             <div class="detail-content">
                 <div class="photo-gallery">
-                    <div class="photo-grid">
-                        <div class="photo-item">
-                            <img src="111.jpg" alt="成绩单正面">
-                        </div>
-                        <div class="photo-item">
-                            <img src="222.jpg" alt="成绩单背面">
-                        </div>
+                    <div class="photo-container">
+                        <img src="516.png" alt="成绩单">
                     </div>
                 </div>
             </div>
